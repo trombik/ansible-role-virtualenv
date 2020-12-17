@@ -1,6 +1,6 @@
-# ansible-role-virtualenv
+# `trombik.virtualenv`
 
-A brief description of the role goes here.
+Install `virtualenv`.
 
 # Requirements
 
@@ -8,9 +8,34 @@ None
 
 # Role Variables
 
-| variable | description | default |
+| Variable | Description | Default |
 |----------|-------------|---------|
+| `virtualenv_package` | | `{{ __virtualenv_package }}` |
+| `virtualenv_flags` | | `""` |
 
+## Debian
+
+| Variable | Default |
+|----------|---------|
+| `__virtualenv_package` | `virtualenv` |
+
+## FreeBSD
+
+| Variable | Default |
+|----------|---------|
+| `__virtualenv_package` | `py37-virtualenv` |
+
+## OpenBSD
+
+| Variable | Default |
+|----------|---------|
+| `__virtualenv_package` | `py-virtualenv` |
+
+## RedHat
+
+| Variable | Default |
+|----------|---------|
+| `__virtualenv_package` | `python-virtualenv` |
 
 # Dependencies
 
@@ -19,6 +44,11 @@ None
 # Example Playbook
 
 ```yaml
+---
+- hosts: localhost
+  roles:
+    - ansible-role-virtualenv
+  vars:
 ```
 
 # License
