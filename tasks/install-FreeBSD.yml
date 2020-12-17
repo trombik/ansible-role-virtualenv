@@ -1,0 +1,6 @@
+---
+
+- name: Install virtualenv
+  pkgng:
+    name: virtualenv
+    state: present

@@ -1,0 +1,9 @@
+---
+virtualenv_user: virtualenv
+virtualenv_group: virtualenv
+virtualenv_log_dir: /var/log/virtualenv
+virtualenv_db_dir: "{{ __virtualenv_db_dir }}"
+virtualenv_service: virtualenv
+virtualenv_conf_dir: "{{ __virtualenv_conf_dir }}"
+virtualenv_conf_file: "{{ __virtualenv_conf_dir }}/virtualenv.conf"
+virtualenv_flags: ""
