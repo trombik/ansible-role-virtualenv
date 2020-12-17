@@ -4,6 +4,8 @@ require "serverspec"
 package = case os[:family]
           when "freebsd"
             "devel/py-virtualenv"
+          when "redhat"
+            "python-virtualenv"
           else
             "virtualenv"
           end
