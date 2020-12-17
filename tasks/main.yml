@@ -1,37 +1,8 @@
 ---
 # tasks file for ansible-role-virtualenv
 
-- include_vars: "{{ ansible_os_family }}.yml"
+- name: "Include {{ ansible_os_family }}.yml"
+  include_vars: "{{ ansible_os_family }}.yml"
 
-- include: "install-{{ ansible_os_family }}.yml"
-
-- name: Create log directory
-  file:
-    path: "{{ virtualenv_log_dir }}"
-    mode: 0755
-    owner: "{{ virtualenv_user }}"
-    group: "{{ virtualenv_group }}"
-    state: directory
-  notify: Restart virtualenv
-
-- name: Create db directory
-  file:
-    path: "{{ virtualenv_db_dir }}"
-    mode: 0755
-    owner: "{{ virtualenv_user }}"
-    group: "{{ virtualenv_group }}"
-    state: directory
-  notify: Restart virtualenv
-
-- name: Create virtualenv.conf
-  template:
-    src: virtualenv.conf.j2
-    dest: "{{ virtualenv_conf_file }}"
-    validate: echo %s
-  notify: Restart virtualenv
-
-- name: Start virtualenv
-  service:
-    name: "{{ virtualenv_service }}"
-    enabled: true
-    state: started
+- name: "Include install-{{ ansible_os_family }}.yml"
+  include: "install-{{ ansible_os_family }}.yml"

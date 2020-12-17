@@ -1,58 +1,26 @@
 require "spec_helper"
 require "serverspec"
 
-package = "virtualenv"
-service = "virtualenv"
-config  = "/etc/virtualenv/virtualenv.conf"
-user    = "virtualenv"
-group   = "virtualenv"
-ports   = [PORTS]
-log_dir = "/var/log/virtualenv"
-db_dir  = "/var/lib/virtualenv"
-
-case os[:family]
-when "freebsd"
-  config = "/usr/local/etc/virtualenv.conf"
-  db_dir = "/var/db/virtualenv"
-end
+package = case os[:family]
+          when "freebsd"
+            "devel/py-virtualenv"
+          end
 
 describe package(package) do
   it { should be_installed }
 end
 
-describe file(config) do
-  it { should be_file }
-  its(:content) { should match Regexp.escape("virtualenv") }
-end
-
-describe file(log_dir) do
-  it { should exist }
-  it { should be_mode 755 }
-  it { should be_owned_by user }
-  it { should be_grouped_into group }
-end
-
-describe file(db_dir) do
-  it { should exist }
-  it { should be_mode 755 }
-  it { should be_owned_by user }
-  it { should be_grouped_into group }
+describe command "virtualenv --version" do
+  its(:exit_status) { should eq 0 }
+  its(:stderr) { should be_empty }
+  its(:stdout) { should match(/^\d+\.\d+\.\d+$/) }
 end
 
 case os[:family]
 when "freebsd"
-  describe file("/etc/rc.conf.d/virtualenv") do
-    it { should be_file }
-  end
-end
-
-describe service(service) do
-  it { should be_running }
-  it { should be_enabled }
-end
-
-ports.each do |p|
-  describe port(p) do
-    it { should be_listening }
+  describe command "pkg info" do
+    its(:exit_status) { should eq 0 }
+    its(:stderr) { should be_empty }
+    its(:stdout) { should_not match(/py2\d+-virtualenv/) }
   end
 end

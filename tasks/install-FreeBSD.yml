@@ -2,5 +2,5 @@
 
 - name: Install virtualenv
   pkgng:
-    name: virtualenv
+    name: "{{ virtualenv_package }}"
     state: present

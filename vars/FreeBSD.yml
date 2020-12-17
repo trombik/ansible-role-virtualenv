@@ -1,3 +1,2 @@
 ---
-__virtualenv_db_dir: /var/db/virtualenv
-__virtualenv_conf_dir: /usr/local/etc/virtualenv
+__virtualenv_package: py37-virtualenv
