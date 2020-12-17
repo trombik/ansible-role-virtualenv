@@ -4,6 +4,8 @@ require "serverspec"
 package = case os[:family]
           when "freebsd"
             "devel/py-virtualenv"
+          else
+            "virtualenv"
           end
 
 describe package(package) do
@@ -13,7 +15,7 @@ end
 describe command "virtualenv --version" do
   its(:exit_status) { should eq 0 }
   its(:stderr) { should be_empty }
-  its(:stdout) { should match(/^\d+\.\d+\.\d+$/) }
+  its(:stdout) { should match(/^(?:virtualenv\s+)?\d+\.\d+\.\d+/) }
 end
 
 case os[:family]
