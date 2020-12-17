@@ -11,7 +11,6 @@ None
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `virtualenv_package` | | `{{ __virtualenv_package }}` |
-| `virtualenv_flags` | | `""` |
 
 ## Debian
 
