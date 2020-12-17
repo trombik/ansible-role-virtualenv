@@ -6,6 +6,8 @@ package = case os[:family]
             "devel/py-virtualenv"
           when "redhat"
             "python-virtualenv"
+          when "openbsd"
+            "py-virtualenv"
           else
             "virtualenv"
           end
